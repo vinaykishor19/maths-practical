@@ -1,0 +1,449 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     13900,        441]
+NotebookOptionsPosition[     13290,        415]
+NotebookOutlinePosition[     13636,        430]
+CellTagsIndexPosition[     13593,        427]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Gauss Seidel Method", "Title",
+ CellChangeTimes->{{3.854764956095346*^9, 3.8547649561109457`*^9}, 
+   3.8547650216310606`*^9, {3.8547650704591455`*^9, 3.8547650944987874`*^9}, {
+   3.8599491229765377`*^9, 3.8599491275503454`*^9}},
+ TextAlignment->Center],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"Name", " ", ":", " ", 
+   RowBox[{"Vinay", " ", "Kishor"}]}], "Subsubsection"]], "Input",
+ CellChangeTimes->{{3.854765103390803*^9, 3.854765103390803*^9}, {
+  3.8553707961982727`*^9, 3.8553707996684713`*^9}, {3.8599491326245575`*^9, 
+  3.8599491395665693`*^9}}],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"Roll", " ", 
+   RowBox[{"Number", " ", ":", " ", "20201459"}]}], "Subsubsection"]], "Input",
+ CellChangeTimes->{{3.8547651360572596`*^9, 3.8547651360572596`*^9}, {
+  3.855370803292679*^9, 3.855370805028778*^9}, {3.859949143062976*^9, 
+  3.8599491439833775`*^9}}],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"Course", " ", ":", " ", 
+   RowBox[{"Bsc", " ", 
+    RowBox[{"(", "H", ")"}], " ", "Computer", " ", "Science"}]}], 
+  "Subsubsection"]], "Input",
+ CellChangeTimes->{{3.85476514189167*^9, 3.85476514189167*^9}, {
+  3.8599491776708364`*^9, 3.859949203103881*^9}}],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"Question", " ", "1"}], "Subsection"]], "Input",
+ CellChangeTimes->{{3.854765158053298*^9, 3.854765158068898*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"GaussSeidel", "[", 
+    RowBox[{"A0_", ",", "b0_", ",", "X0_", ",", "maxiter_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", "\n", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"A", "=", 
+        RowBox[{"N", "[", "A0", "]"}]}], ",", 
+       RowBox[{"b", "=", 
+        RowBox[{"N", "[", "b0", "]"}]}], ",", 
+       RowBox[{"xk", "=", "X0"}], ",", "xk1", ",", "i", ",", "j", ",", 
+       RowBox[{"k", "=", "0"}], ",", "n", ",", "m", ",", "OutputDetails"}], 
+      "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{"size", "=", 
+       RowBox[{"Dimensions", "[", "A", "]"}]}], ";", "\n", 
+      RowBox[{"n", "=", 
+       RowBox[{"size", "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], ";", "\n", 
+      RowBox[{"m", "=", 
+       RowBox[{"size", "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], ";", "\n", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"n", "\[NotEqual]", "m"}], ",", "\n", 
+        RowBox[{
+         RowBox[{
+         "Print", "[", 
+          "\"\<Not a square matrix, cannot proceed with gauss seidel method\>\
+\"", "]"}], ";", "\n", 
+         RowBox[{"Return", "[", "]"}]}]}], "\n", "]"}], ";", "\n", 
+      RowBox[{"OutputDetails", "=", 
+       RowBox[{"{", "xk", "}"}]}], ";", "\n", 
+      RowBox[{"xk1", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "n", "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"While", "[", 
+       RowBox[{
+        RowBox[{"k", "<", "maxiter"}], ",", "\n", 
+        RowBox[{
+         RowBox[{"For", "[", 
+          RowBox[{
+           RowBox[{"i", "=", "1"}], ",", 
+           RowBox[{"i", "\[LessEqual]", "n"}], ",", 
+           RowBox[{"i", "++"}], ",", "\n", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"xk1", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "=", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"1", "/", 
+                RowBox[{"A", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", ",", "i"}], "]"}], "]"}]}], ")"}], "*", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"b", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], "-", 
+                RowBox[{"Sum", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"A", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "j"}], "]"}], "]"}], "*", 
+                   RowBox[{"xk1", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}]}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"j", ",", "1", ",", 
+                    RowBox[{"i", "-", "1"}]}], "}"}]}], "]"}], "-", "\n", 
+                RowBox[{"Sum", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"A", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "j"}], "]"}], "]"}], "*", 
+                   RowBox[{"xk", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}]}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"j", ",", 
+                    RowBox[{"i", "+", "1"}], ",", "n"}], "}"}]}], "]"}]}], 
+               ")"}]}]}], ";"}]}], "\n", "]"}], ";", "\n", 
+         RowBox[{"k", "++"}], ";", "\n", 
+         RowBox[{"OutputDetails", "=", 
+          RowBox[{"Append", "[", 
+           RowBox[{"OutputDetails", ",", "xk1"}], "]"}]}], ";", "\n", 
+         RowBox[{"xk", "=", "xk1"}], ";"}]}], "\n", "]"}], ";", "\n", 
+      RowBox[{"colHeading", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"X", "[", "s", "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"s", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"Print", "[", 
+       RowBox[{"NumberForm", "[", 
+        RowBox[{
+         RowBox[{"TableForm", "[", 
+          RowBox[{"OutputDetails", ",", "\n", 
+           RowBox[{"TableHeadings", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{"None", ",", "colHeading"}], "}"}]}]}], "]"}], ",", 
+         "6"}], "]"}], "]"}], ";", "\n", 
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<No of iterations performed\>\"", ",", "maxiter"}], "]"}], 
+      ";"}]}], "\n", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"A", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"2", ",", 
+       RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1"}], ",", "2", ",", 
+       RowBox[{"-", "1"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", 
+       RowBox[{"-", "1"}], ",", "2"}], "}"}]}], "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"b", "=", 
+   RowBox[{"{", 
+    RowBox[{"7", ",", "1", ",", "1"}], "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"X0", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], ";"}], "\n", 
+ RowBox[{"GaussSeidel", "[", 
+  RowBox[{"A", ",", "b", ",", "X0", ",", "15"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.8547651991749697`*^9, 3.854765203730178*^9}, {
+   3.8547652409830427`*^9, 3.8547652443370485`*^9}, 3.854765299732745*^9, {
+   3.8547653650656595`*^9, 3.8547654639074316`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TagBox[
+  TagBox[
+   TagBox[GridBox[{
+      {
+       TagBox[
+        RowBox[{"X", "[", 
+         InterpretationBox["\<\"1\"\>",
+          1,
+          Editable->False], "]"}],
+        HoldForm], 
+       TagBox[
+        RowBox[{"X", "[", 
+         InterpretationBox["\<\"2\"\>",
+          2,
+          Editable->False], "]"}],
+        HoldForm], 
+       TagBox[
+        RowBox[{"X", "[", 
+         InterpretationBox["\<\"3\"\>",
+          3,
+          Editable->False], "]"}],
+        HoldForm]},
+      {
+       InterpretationBox["\<\"0\"\>",
+        0,
+        Editable->False], 
+       InterpretationBox["\<\"0\"\>",
+        0,
+        Editable->False], 
+       InterpretationBox["\<\"0\"\>",
+        0,
+        Editable->False]},
+      {
+       InterpretationBox["\<\"3.5\"\>",
+        3.5,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.25\"\>",
+        2.25,
+        AutoDelete->True], 
+       InterpretationBox["\<\"1.625\"\>",
+        1.625,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"4.625\"\>",
+        4.625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"3.625\"\>",
+        3.625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.3125\"\>",
+        2.3125,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5.3125\"\>",
+        5.3125,
+        AutoDelete->True], 
+       InterpretationBox["\<\"4.3125\"\>",
+        4.3125,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.65625\"\>",
+        2.65625,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5.65625\"\>",
+        5.65625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"4.65625\"\>",
+        4.65625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.82813\"\>",
+        2.828125,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5.82813\"\>",
+        5.828125,
+        AutoDelete->True], 
+       InterpretationBox["\<\"4.82813\"\>",
+        4.828125,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.91406\"\>",
+        2.9140625,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5.91406\"\>",
+        5.9140625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"4.91406\"\>",
+        4.9140625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.95703\"\>",
+        2.95703125,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5.95703\"\>",
+        5.95703125,
+        AutoDelete->True], 
+       InterpretationBox["\<\"4.95703\"\>",
+        4.95703125,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.97852\"\>",
+        2.978515625,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5.97852\"\>",
+        5.978515625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"4.97852\"\>",
+        4.978515625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.98926\"\>",
+        2.9892578125,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5.98926\"\>",
+        5.9892578125,
+        AutoDelete->True], 
+       InterpretationBox["\<\"4.98926\"\>",
+        4.9892578125,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.99463\"\>",
+        2.99462890625,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5.99463\"\>",
+        5.99462890625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"4.99463\"\>",
+        4.99462890625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.99731\"\>",
+        2.997314453125,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5.99731\"\>",
+        5.997314453125,
+        AutoDelete->True], 
+       InterpretationBox["\<\"4.99731\"\>",
+        4.997314453125,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.99866\"\>",
+        2.9986572265625,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5.99866\"\>",
+        5.9986572265625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"4.99866\"\>",
+        4.9986572265625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.99933\"\>",
+        2.99932861328125,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5.99933\"\>",
+        5.99932861328125,
+        AutoDelete->True], 
+       InterpretationBox["\<\"4.99933\"\>",
+        4.99932861328125,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.99966\"\>",
+        2.999664306640625,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5.99966\"\>",
+        5.999664306640625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"4.99966\"\>",
+        4.999664306640625,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.99983\"\>",
+        2.9998321533203125`,
+        AutoDelete->True]},
+      {
+       InterpretationBox["\<\"5.99983\"\>",
+        5.9998321533203125`,
+        AutoDelete->True], 
+       InterpretationBox["\<\"4.99983\"\>",
+        4.9998321533203125`,
+        AutoDelete->True], 
+       InterpretationBox["\<\"2.99992\"\>",
+        2.9999160766601562`,
+        AutoDelete->True]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, 
+       "Rows" -> {False, True, {False}, False}, "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[2.0999999999999996`]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    {None, OutputFormsDump`HeadedColumns}],
+   Function[BoxForm`e$, 
+    TableForm[BoxForm`e$, TableHeadings -> {None, {
+        $CellContext`X[1], 
+        $CellContext`X[2], 
+        $CellContext`X[3]}}]]],
+  NumberForm[#, 6]& ]], "Print",
+ CellChangeTimes->{3.854765429774572*^9, 3.854765464593833*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"No of iterations performed\"\>", "\[InvisibleSpace]", "15"}],
+  SequenceForm["No of iterations performed", 15],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.854765429774572*^9, 3.854765464593833*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1008, 686},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 260, 4, 101, "Title"],
+Cell[843, 28, 297, 6, 42, "Input"],
+Cell[1143, 36, 298, 6, 42, "Input"],
+Cell[1444, 44, 296, 7, 42, "Input"],
+Cell[1743, 53, 149, 3, 44, "Input"],
+Cell[CellGroupData[{
+Cell[1917, 60, 5114, 135, 563, "Input"],
+Cell[CellGroupData[{
+Cell[7056, 199, 5937, 204, 261, "Print"],
+Cell[12996, 405, 254, 5, 22, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
